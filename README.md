@@ -8,5 +8,6 @@ PanEffect is a JavaScript framework to explore variant effects across a pangenom
 Download the tool esm-variants from github: https://github.com/ntranoslab/esm-variants
 
 Run esm-variants on your protein FASTA file and save it to a CSV file:
+```bash
 python esm_score_missense_mutations.py --input-fasta-file proteins.fasta --output-csv-file proteins.csv
-
+```
