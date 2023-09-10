@@ -62,16 +62,19 @@ python make_trait_tsv_files.py gene_model_gwas.tsv ./traits/
 
 This step most likely will need to be customized for the organism that is being used as the reference.  Create a TSV file for the annotations that will be displayed in the gene summary section of PanEffect.  For example the TSV for annotations downloaded from MaizeGDB include the following headers:  
 
-B73_v5_model	
-B73_v5_canonical_transcript	
-Chr	
-Start	
-End	
-Uniprot_id	
-Uniprot_description	
-Uniprot_GO_terms	
-MaizeGDB_gene_symbol	
-MaizeGDB_gene_name
+| Parameters                      |
+|---------------------------------|
+| `B73_v5_model`                  |
+| `B73_v5_canonical_transcript`   |
+| `Chr`                           |
+| `Start`                         |
+| `End`                           |
+| `Uniprot_id`                    |
+| `Uniprot_description`           |
+| `Uniprot_GO_terms`              |
+| `MaizeGDB_gene_symbol`          |
+| `MaizeGDB_gene_name`            |
+
 
 The script make_gene_model_annotation_files.py will take the input TSV and create sperate files for each gene model transcript.
 ```bash
@@ -91,10 +94,10 @@ Use the XXX shell script that calls both mkdssp and process_dssp_tsv.py that loo
 make_dssp_files.sh ./PDB/ ./dssp_tmp/ ./dssp/ ./python/
 ```
 Where 
-./PDB/         #Directory where the PDBs are located
-./dssp_tmp/    #A tempory directory that stores the direct output from mkdssp
-./dssp/        #The directory that stores the TSV files
-.              #The directroy where process_dssp_tsv.py is located
-
-
+| Directories/Parameters   | Description                                                                         |
+|-------------------------|-------------------------------------------------------------------------------------|
+| `./PDB/`                | Directory where the PDBs are located                                                |
+| `./dssp_tmp/`           | A temporary directory that stores the direct output from mkdssp                     |
+| `./dssp/`               | The directory that stores the TSV files                                             |
+| `.`                     | The directory where `process_dssp_tsv.py` is located                                 |
 
