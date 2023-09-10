@@ -3,7 +3,6 @@ PanEffect is a JavaScript framework to explore variant effects across a pangenom
 
 # Building PanEffect datasets
 
-
 ## Requirements
 
 - Python
@@ -25,6 +24,21 @@ python split_esm_output_for_website.py proteins.csv ./csv/
 ```
 ## Variant effect heat maps for a pan-genome
 
+These next steps combine the output from the esm-variants with the multiple seqeunce alignments of the proteins in a pangenome.  Step 1, download or generate multiple sequence alignments and store the FASTA seqeunces in a FASTA file.  Next, run three Python scripts to create heatmap, target, and query TSV files.
+
+Step 2: use format_pan_heatmap.py to convert each FASTA file into a TSV that list the x and y position of the heatmap, the variant score, the positions of the amino acid in B73 and target protein, and the amino acid codes at those positions.
+```bash
+python format_pan_heatmap.py ./msa/ ./heatmap/
+```
+Step 3: use format_pan_target.py to convert each FASTA file into a TSV that list the y position of the heatmap and the gene model and genome name associated with that row of the heatmap.  This script will need to be modified for the genomes in the desired pangenome. 
+
+```bash
+python format_pan_target.py ./msa/ ./target/
+```
+Step 4: use format_pan_query.py to convert each FASTA file into a TSV that list the x position in the heatmap with the correspond x position in the reference protein (they might be different due to insertions and deletions in the alignments) and the amino acid at that position.
+```bash
+python format_pan_query.py ./msa/ ./query/
+```
 
 ## Pfam domains
 
@@ -89,7 +103,7 @@ Next, Install DSSP by using conda or pip
 ```bash
 pip install -c salilab dssp
 ```
-Use the XXX shell script that calls both mkdssp and process_dssp_tsv.py that loops through all the PDB files in a directory and creates a TSV file with the position, amino acid, and secondary structure code for each B73 isoform.
+Use the make_dssp_files.sh shell script that calls both mkdssp and process_dssp_tsv.py that loops through all the PDB files in a directory and creates a TSV file with the position, amino acid, and secondary structure code for each B73 isoform.
 ```bash
 make_dssp_files.sh ./PDB/ ./dssp_tmp/ ./dssp/ ./python/
 ```
