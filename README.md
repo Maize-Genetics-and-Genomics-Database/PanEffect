@@ -153,7 +153,7 @@ The script make_gene_model_annotation_files.py will take the input TSV and creat
 python make_gene_model_annotation_files.py annotations.tsv ./uniprot/
 ```
 
-## Secondary protein structures
+## Protein secondary structures
 
 The secondary structure assignemnts are based on PDB files for each gene model isoform.  The PDB files can be from either AlphaFold, ESMFold, or another 3D protein prediction method.  For the MaizeGDB instance, protein structures were predicted using ESMFold at https://github.com/facebookresearch/esm.
 
