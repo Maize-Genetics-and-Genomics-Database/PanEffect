@@ -71,7 +71,7 @@ Each of the  data directories has a sample entry for the B73 gene model Zm00001e
 
 ## Variant effect heat maps for a reference genome
 
-Clone and install the tool esm-variants from github: https://github.com/ntranoslab/esm-variants and run the following command.
+Clone and install the tool esm-variants from github: https://github.com/ntranoslab/esm-variants and run the following commands.
 
 Run esm-variants on your protein FASTA file (see examples) and save it to a CSV file:
 ```bash
