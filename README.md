@@ -10,7 +10,7 @@ PanEffect is a JavaScript framework to explore variant effects across a pangenom
 - Python librairies argparse, biopython, collections, csv, pandas, torch
 - The esm-variant tools works using a CPUs but runs a lot faster on GPU hardware.
 
-## Variant effect heatmmaps for a reference genome
+## Variant effect heat maps for a reference genome
 
 Download and install the tool esm-variants from github: https://github.com/ntranoslab/esm-variants and run the following command.
 
@@ -23,7 +23,7 @@ Use the split_esm_output_for_website.py script to convert the esm-variant output
 ```bash
 python split_esm_output_for_website.py proteins.csv ./csv/
 ```
-## Variant effect heatmaps for a pan-genome
+## Variant effect heat maps for a pan-genome
 
 
 ## Pfam domains
@@ -34,6 +34,24 @@ python make_pfam_files.py proteins_interproscan.tsv ./pfam/B73/
 ```
 
 ## GWAS trait annotations
+
+Run the create_trait_file.py script to find any SNP position within N base pairs of the start and end position of a gene model. 
+
+```bash
+python create_trait_file.py gene_model.gff gwas_snp.gff gene_model_gwas.tsv 1000 'name' 'Wallace et. al'
+```
+The data for the three datasets are merged and a final TSV file is created for each gene model listing the trait name and which study it came from. 
+
+Arguments:
+gene_model.gff             #Gene model annotation GFF
+gwas_snp.gff               #GWAS GFF that associates a trait or phenotyp to a SNP location
+gene_model_gwas.tsv        #output filename
+1000                       #How many base pairs to expand the start annd end positions of a gene model when searching for a nearby SNP
+'name'                     #What is the trait named in the last column of the GFF, examples include 'id' 'name' 'trait'
+'Wallace et. al'           #Short name of the source or reference for the data
+
+Next, if you have multiple sources of trait data, combine thae data into a singele file then run the script make_trait_tsv_files.py, that creates a TSV file listing the gene model, trait, and source for each gene model.
+
 
 ## Functional annotations
 
