@@ -43,12 +43,15 @@ python create_trait_file.py gene_model.gff gwas_snp.gff gene_model_gwas.tsv 1000
 The data for the three datasets are merged and a final TSV file is created for each gene model listing the trait name and which study it came from. 
 
 Arguments:
-gene_model.gff             #Gene model annotation GFF
-gwas_snp.gff               #GWAS GFF that associates a trait or phenotyp to a SNP location
-gene_model_gwas.tsv        #output filename
-1000                       #How many base pairs to expand the start annd end positions of a gene model when searching for a nearby SNP
-'name'                     #What is the trait named in the last column of the GFF, examples include 'id' 'name' 'trait'
-'Wallace et. al'           #Short name of the source or reference for the data
+| Files/Parameters        | Description                                                                           |
+|-------------------------|---------------------------------------------------------------------------------------|
+| `gene_model.gff`        | Gene model annotation GFF                                                              |
+| `gwas_snp.gff`          | GWAS GFF that associates a trait or phenotype to a SNP location                        |
+| `gene_model_gwas.tsv`   | output filename                                                                       |
+| `1000`                  | How many base pairs to expand the start and end positions of a gene model when searching for a nearby SNP |
+| `'name'`                | What is the trait named in the last column of the GFF, examples include 'id' 'name' 'trait'   |
+| `'Wallace et. al'`      | Short name of the source or reference for the data                                     |
+
 
 Next, if you have multiple sources of trait data, combine thae data into a singele file then run the script make_trait_tsv_files.py, that creates a TSV file listing the gene model, trait, and source for each gene model.
 ```bash
