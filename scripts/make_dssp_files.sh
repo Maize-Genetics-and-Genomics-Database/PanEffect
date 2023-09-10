@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Directory containing the PDB files
-DIR="/Users/carsonandorf/Documents/code/SSDraw/SSDraw/B73-selected/non"
-DIR_OUT="/Users/carsonandorf/Documents/code/SSDraw/SSDraw/out"
-DIR_DSSP="/Users/carsonandorf/Documents/code/SSDraw/SSDraw/dssp"
-HOME_DIR="/Users/carsonandorf/Documents/code/SSDraw/SSDraw/"
+DIR=$1
+DIR_OUT=$2
+DIR_DSSP=$3
+HOME_DIR=$4
 
 cd $DIR
 
