@@ -136,7 +136,7 @@ python make_trait_tsv_files.py gene_model_gwas.tsv ./traits/
 
 This step most likely will need to be customized for the organism that is being used as the reference.  Create a TSV file for the annotations that will be displayed in the gene summary section of PanEffect.  For example the TSV for annotations downloaded from MaizeGDB include the following headers:  
 
-| Parameters                      |
+| Headers                         |
 |---------------------------------|
 | `B73_v5_model`                  |
 | `B73_v5_canonical_transcript`   |
