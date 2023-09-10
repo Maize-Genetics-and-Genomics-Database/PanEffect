@@ -34,6 +34,8 @@ The search section has a search bar and short summary of the tool. The search wi
 ### Help
 The help section provides summaries of each of the visualization components.  It also provides descriptions and links to the data sources, tools, and references used to create PanEffect. 
 
+![Help](./Figure5.png)
+
 ## PanEffect website directory structure
 
 ```bash
