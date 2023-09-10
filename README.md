@@ -12,7 +12,7 @@ PanEffect is a JavaScript framework to explore variant effects across a pangenom
 
 ## Variant effect heat maps for a reference genome
 
-Download and install the tool esm-variants from github: https://github.com/ntranoslab/esm-variants and run the following command.
+Clone and install the tool esm-variants from github: https://github.com/ntranoslab/esm-variants and run the following command.
 
 Run esm-variants on your protein FASTA file (see examples) and save it to a CSV file:
 ```bash
@@ -51,11 +51,47 @@ gene_model_gwas.tsv        #output filename
 'Wallace et. al'           #Short name of the source or reference for the data
 
 Next, if you have multiple sources of trait data, combine thae data into a singele file then run the script make_trait_tsv_files.py, that creates a TSV file listing the gene model, trait, and source for each gene model.
-
+```bash
+python make_trait_tsv_files.py gene_model_gwas.tsv ./traits/
+```
 
 ## Functional annotations
 
+This step most likely will need to be customized for the organism that is being used as the reference.  Create a TSV file for the annotations that will be displayed in the gene summary section of PanEffect.  For example the TSV for annotations downloaded from MaizeGDB include the following headers:  
+
+B73_v5_model	
+B73_v5_canonical_transcript	
+Chr	
+Start	
+End	
+Uniprot_id	
+Uniprot_description	
+Uniprot_GO_terms	
+MaizeGDB_gene_symbol	
+MaizeGDB_gene_name
+
+The script make_gene_model_annotation_files.py will take the input TSV and create sperate files for each gene model transcript.
+```bash
+python make_gene_model_annotation_files.py annotations.tsv ./uniprot/
+```
+
 ## Secondary protein structures
+
+The secondary structure assignemnts are based on PDB files for each gene model isoform.  The PDB files can be from either AlphaFold, ESMFold, or another 3D protein prediction method.  For the MaizeGDB instance, protein structures were predicted using ESMFold at https://github.com/facebookresearch/esm.
+
+Next, Install DSSP by using conda or pip
+```bash
+pip install -c salilab dssp
+```
+Use the XXX shell script that calls both mkdssp and process_dssp_tsv.py that loops through all the PDB files in a directory and creates a TSV file with the position, amino acid, and secondary structure code for each B73 isoform.
+```bash
+make_dssp_files.sh ./PDB/ ./dssp_tmp/ ./dssp/ ./python/
+```
+Where 
+./PDB/         #Directory where the PDBs are located
+./dssp_tmp/    #A tempory directory that stores the direct output from mkdssp
+./dssp/        #The directory that stores the TSV files
+.              #The directroy where process_dssp_tsv.py is located
 
 
 
