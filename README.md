@@ -1,6 +1,10 @@
 # PanEffect
 PanEffect is a JavaScript framework to explore variant effects across a pangenome.  The tool has two views that allows a user to (1) explore all possible amino acid substitutions and their variant effects for a reference genome, and (2) view the natural variation and their effects across a pangenome.
 
+## MaizeGDB instance of PanEffect
+
+https://www.maizegdb.org/effect/index.html
+
 # PanEffect website
 
 ## PaneEffect website description
@@ -10,16 +14,22 @@ The PanEffect web interface has five components: Gene Summary, Variant Effects i
 ### Gene Summary
 This section provides a detailed look at annotations and valuable information regarding gene models and proteins. The gene summary is customizable for each instance of PanEffect. The MaizeGDB instance includes gene and gene model annotations from MaizeGDB, protein annotations from UniProt, links to 3D structure tools, and trait data from three collections of genome-wide association studies.
 
+![Gene Summary](./Figure1.png)
+
 ### Variant Effects in reference genome
 The first variant effects view provides a visualization of the variant effects of all possible amino acid substitutions for a reference genome. This section has two heatmaps, one providing a broad overview and another providing detailed insight. The width of the heatmap represents each position of the reference protein and the height of the position represents the 20 possible amino acid substitutions. The cells within the heatmap shift from blue (benign outcomes) to red (strong phenotypic impact). Hovering over a cell provides additional information about the possible substitution including position, substitution, and score. A slider bar in the center of the page controls which portion of the protein is shown in the zoomed page. Two tracks above the heat show the locations of Pfam domains and predicted secondary structures which further provide context regarding the functional and structural roles in the consequence of amino acid substitutions. 
 
-![Variant Effects in reference genome](./Figure1.png)
+![Variant Effects in reference genome](./Figure2.png)
 
 ### Variant Effects across the Pangenome
 The second view also displays heat maps with a broad and detailed view, but in the pangenome instance, they show the effects of naturally occurring variations across the pangenome. The width of the heatmap represents each position of the protein of the reference protein while the rows of the heat map represent each protein in the pangenome aligned to the reference protein. Insertions and deletions in the alignments of the proteins are characterized by a ‘-’. The heatmap representation shifts from blue (benign outcomes) to red (strong phenotypic impact) for variants within the pangenome as compared to the reference protein. Hovering over a cell provides additional information about the possible substitution including B73 position, target position, target genome, target gene model, substitution, and score. This view is only available for the canonical transcript of each gene model. 
 
+![Variant Effects across the Pangenome](./Figure3.png)
+
 ### Search
 The search section has a search bar and short summary of the tool. The search will accept gene models, transcripts, and protein identifiers.
+
+![Search](./Figure4.png)
 
 ### Help
 The help section provides summaries of each of the visualization components.  It also provides descriptions and links to the data sources, tools, and references used to create PanEffect. 
