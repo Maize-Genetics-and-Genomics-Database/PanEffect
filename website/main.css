@@ -1,0 +1,427 @@
+    body {
+        background-color: #FFFFFF; /* This is light grey */
+        margin: 0;
+        font-family: Arial, sans-serif; /* You can choose another font family if you prefer */
+    }
+
+    .main-container {
+        width: 1400px;
+        margin: 0 auto;
+    }
+
+    .header {
+        padding: 20px;
+        text-align: left;
+        background: linear-gradient(to right, rgb(24,66,159), rgb(100,146,239));
+        color: white;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .tabs {
+        display: flex;
+        justify-content: start;
+        border-bottom: 2px solid #ccc;
+    }
+
+    .tab {
+        padding: 10px 20px;
+        cursor: pointer;
+        border: none;
+        background: none;
+        font-size: 16px;
+        outline: none;
+        transition: background-color 0.3s;
+    }
+
+    .tab:hover {
+        background-color: #eee;
+    }
+
+    .tab.active {
+        background-color: darkgrey;
+    }
+    /* main content of the webpage e*/
+    .content {
+        display: none;
+        padding: 20px;
+        border-top: 1px solid #ccc;
+    }
+
+    .content.active {
+        display: block;
+    }
+
+    /* Title styling */
+    .gene-model-title {
+        font-weight: bold;
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    /* Feature list styling */
+    .gene-model-features {
+        list-style-type: square;
+        padding-left: 20px;
+    }
+
+    .gene-model-features li {
+        margin-bottom: 5px;
+    }
+
+    /* To position Help tab to the far right */
+    .tabs {
+        justify-content: space-between;
+    }
+
+    .text-content {
+        font-family: Arial, sans-serif;
+        font-size: 18px;
+    }
+
+    .help-list li{
+        margin-bottom: 10px;
+    }
+
+    /* Radio buttons in the search */
+    .radio-options label {
+        display: inline-block;
+        margin-right: 30px;  /* Adjust this value to increase or decrease horizontal spacing */
+        margin-bottom: 10px; /* For vertical spacing between choices if they wrap to the next line */
+        font-family: Arial, sans-serif;
+        font-size: 18px;
+        }
+
+    /* footer across the bottom of the page */
+    .footer {
+        padding: 20px;
+        text-align: center;
+        background: linear-gradient(to right, rgb(24,66,159), rgb(100,146,239));
+        color: white;
+        font-size: 16px;
+        margin-top: 5px; /* Optional: Adds a space between the content and the footer */
+        position: relative;
+        bottom: 0;
+    }
+
+    /* loading icon when the initial data is loading */
+    #loading-icon {
+        position: fixed;
+        top: 200px; /* This sets it 200px from the top */
+        left: 0;
+        right: 0;
+        background-color: rgba(255,255,255,0); /* Semi-transparent white */
+        z-index: 1000; /* Any high number so it appears above all other content */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Container styling */
+    .gene-model-container {
+        display: flex;
+        padding: 15px;
+        max-width: 1400px;
+        font-family: Arial, sans-serif;
+        justify-content: space-between;
+    }
+
+    /* Add columns to the gene summary section */
+    .column {
+        flex: 1;                /* Each column takes equal space */
+        padding: 0 20px;        /* Some padding for aesthetics */
+    }
+
+    .spaced-list li {
+        margin-bottom: 10px; /* Adjust this value for desired spacing */
+        list-style-type: square;
+        padding-left: 5px;
+    }
+
+    /* Search Box Container styling */
+    .search-container {
+        flex: 1;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 15px;
+        background-color: #f9f9f9;
+        box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .search-input {
+        width: 80%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+
+    .sample-entries {
+        padding-left: 10px;
+    }
+
+    .sample-entry {
+        margin-bottom: 5px;
+    }
+
+    /* Style for the number lines above each heatmap that has ticks and labels */
+    .numberLine {
+        width: 1200px;
+        height: 30px;
+        position: relative;
+        margin-bottom: 10px;
+    }
+
+    /* number line tick */
+    .tick {
+        position: absolute;
+        width: 1px;
+        height: 10px;
+        background-color: black;
+        top: 0;
+        bottom: -35px;
+        margin: auto;
+    }
+
+    /* number line last */
+    .label {
+        position: absolute;
+        font-size: 12px;
+        top: 15px;  /* Reduced space between label and tick */
+        transform: translateX(-50%);
+    }
+
+    .label-last {
+        position: absolute;
+        font-size: 12px;
+        top: 35px;  /* Reduced space between label and tick */
+        transform: translateX(-50%);
+    }
+
+    .tick_bottom {
+        position: absolute;
+        width: 1px;
+        height: 10px;
+        background-color: black;
+        top: 15px;
+        bottom: -35px;
+        margin: auto;
+    }
+
+    .label_bottom {
+        position: absolute;
+        font-size: 14px;
+        top: 0px;  /* Reduced space between label and tick */
+        transform: translateX(-50%);
+    }
+
+    /* Gene Model styles */
+    .geneModel {
+        width: 1200px;
+        background-color: white;
+        position: relative;
+        padding-bottom: 5px;
+        margin-top: 10px;
+        min-height: 30px;
+    }
+
+    /* PFam domains */
+    .domain {
+        height: 20px;
+        background-color: blue; /* This color will be overridden by the dynamic color assignment, but you can keep it as a default/fallback. */
+        position: absolute;
+        border-radius: 15px;
+        margin-top: 5px;
+        border: 2px solid grey; /* This line adds the grey border. */
+    }
+
+    /* Truncate PFam labels if needed */
+    .truncate {
+        height: 20px;
+        background-color: white;
+        position: absolute;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* Section Headers */
+    .sectionHeader {
+        font-size: 16px;
+        font-weight: bold;
+        margin-top: 20px;  /* Increased margin-top to avoid overlap */
+    }
+
+    .heatmap {
+        width: 1200px;
+        height: 200px; /* Adjust height if needed */
+        position: relative;
+    }
+
+    /* Heatmap tooltips */
+    .tooltip {
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.75);
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        pointer-events: none; /* Make sure the tooltip doesn't interfere with mouse events */
+        visibility: hidden;   /* Initially hidden */
+        white-space: nowrap;
+        font-size: 0.9em;
+    }
+
+    /* PFam domains tooltips */
+    .tooltipdomain {
+        position: absolute;
+        background-color: #BBB;
+        color: black;
+        padding: 5px 10px;
+        border-radius: 5px;
+        pointer-events: none; /* Make sure the tooltip doesn't interfere with mouse events */
+        visibility: hidden;   /* Initially hidden */
+        white-space: nowrap;
+        font-size: 0.9em;
+    }
+
+    .slider-container {
+        width: 1200px;
+        margin: 20px 0;
+        position: relative;
+    }
+
+    #zoom-slider {
+        width: 100%;
+    }
+
+    #slider-value {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    #zoom-slider-pan {
+        width: 100%;
+    }
+
+    #slider-value-pan {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .heatmap-container {
+        width: 1200px;
+        height: 200px;
+        position: relative;
+    }
+
+    .heatmap-container-zoom {
+        width: 1200px;
+        height: 200px;
+        position: relative;
+    }
+
+    .heatmap-container-pan {
+        width: 1200px;
+        height: 200px;
+        position: relative;
+    }
+
+    .heatmap-container-zoom-pan {
+        width: 1200px;
+        height: 200px;
+        position: relative;
+    }
+
+    #zoomed-heatmap {
+        border: 2px solid black;
+    }
+
+    #highlight-box {
+        border: 3px solid blue;
+        position: absolute;
+        top: 0;
+        height: 100%;
+        z-index: 10;  // This ensures the box is above the heatmap cells
+    }
+
+    #highlight-box-pan {
+        border: 3px solid blue;
+        position: absolute;
+        top: 0;
+        height: 100%;
+        z-index: 10;  // This ensures the box is above the heatmap cells
+    }
+
+    .search {
+     width: 100%;
+     position: relative;
+     display: flex;
+    }
+
+    /* Examples for search box */
+    .example {
+     color: #999;
+     font-size: 18px;
+    }
+
+    .searchTerm {
+     width: 100%;
+     border: 3px solid #999999;
+     border-right: none;
+     padding: 5px;
+     height: 30px;
+     font-size: 24px;
+     border-radius: 5px 0 0 5px;
+     outline: none;
+     color: #999999;
+    }
+
+    .searchTerm:focus{
+     color: #111111;
+    }
+
+    .searchButton {
+     width: 46px;
+     height: 46px;
+     border: 1px solid #999999;
+     background: #999999;
+     text-align: center;
+     color: #FFF;
+     border-radius: 0 5px 5px 0;
+     cursor: pointer;
+     font-size: 24px;
+    }
+
+    .wrap{
+     width: 90%;
+    }
+
+    /* Heatmap legend */
+    .colorBox {
+        width: 30px;
+        height: 30px;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .labelCB {
+        font-size: 12px;
+        width: 20px;
+        margin-bottom: 5px;
+    }
+    .valueCB {
+        margin-left: 40px;
+        display: inline-block;
+        font-size: 12px;
+        width: 40px;
+        position: absolute;
+    }
+    .rowCB {
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
