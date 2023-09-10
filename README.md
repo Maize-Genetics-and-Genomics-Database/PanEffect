@@ -1,6 +1,35 @@
 # PanEffect
 PanEffect is a JavaScript framework to explore variant effects across a pangenome.  The tool has two views that allows a user to (1) explore all possible amino acid substitutions and their variant effects for a reference genome, and (2) view the natural variation and their effects across a pangenome.
 
+# PanEffect website
+
+
+## PaneEffect website description
+
+## PanEffect website directory structure
+
+```bash
+website/
+├── css
+    └── main.css
+├── csv
+├── dssp
+├── heatmap
+├── img
+    └── loading.gif
+├── index.html
+├── js
+    ├── dom.js
+    ├── genome.js
+    ├── main.js
+    ├── pan.js
+    └── support.js
+├── pfam
+├── query  
+├── target
+└── uniprot
+```
+
 # Building PanEffect datasets
 
 ## Requirements
