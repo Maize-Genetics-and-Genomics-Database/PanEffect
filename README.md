@@ -1,5 +1,5 @@
 # PanEffect
-PanEffect is a JavaScript framework to explore variant effects across a pangenome.  The tool has two views that allows a user to (1) explore all possible amino acid substitutions and their variant effects for a reference genome, and (2) view the natural variation and their effects across a pangenome.
+PanEffect is a JavaScript framework to explore variant effects across a pan-genome.  The tool has two views that allows a user to (1) explore all possible amino acid substitutions and their variant effects for a reference genome, and (2) view the natural variation and their effects across a pan-genome.
 
 ## MaizeGDB instance of PanEffect
 
@@ -9,7 +9,7 @@ https://www.maizegdb.org/effect/index.html
 
 ## PaneEffect website description
 
-The PanEffect web interface has five components: Gene Summary, Variant Effects in reference genome, Variant Effects across the Pangenome, Search, and Help. Each component is fully client-side using JavaScript to manage the front-end visualization. Figure 1 provides an overview of the reference genome view and Figure 2 shows pangenome view. PanEffect is organized into one HTML file, five Javascript files, and a CSS file. The index HTML file contains the framework for the displays. The Javascript files manage the data loading (main.js), reference genome visualization (genome.js), pangenome visualization (pan.js), webpage layout (dom.js), and support functions (support.js). The CSS file store the styles and formatting of the tool. A description of each of the five major components, provided as tabs in PanEffect, is provided below.
+The PanEffect web interface has five components: Gene Summary, Variant Effects in reference genome, Variant Effects across the Pan-genome, Search, and Help. Each component is fully client-side using JavaScript to manage the front-end visualization. Figure 1 provides an overview of the reference genome view and Figure 2 shows pan-genome view. PanEffect is organized into one HTML file, five Javascript files, and a CSS file. The index HTML file contains the framework for the displays. The Javascript files manage the data loading (main.js), reference genome visualization (genome.js), pan-genome visualization (pan.js), webpage layout (dom.js), and support functions (support.js). The CSS file store the styles and formatting of the tool. A description of each of the five major components, provided as tabs in PanEffect, is provided below.
 
 ### Gene Summary
 This section provides a detailed look at annotations and valuable information regarding gene models and proteins. The gene summary is customizable for each instance of PanEffect. The MaizeGDB instance includes gene and gene model annotations from MaizeGDB, protein annotations from UniProt, links to 3D structure tools, and trait data from three collections of genome-wide association studies.
@@ -21,10 +21,10 @@ The first variant effects view provides a visualization of the variant effects o
 
 ![Variant Effects in reference genome](./figures/Figure2.png)
 
-### Variant Effects across the Pangenome
-The second view also displays heat maps with a broad and detailed view, but in the pangenome instance, they show the effects of naturally occurring variations across the pangenome. The width of the heatmap represents each position of the protein of the reference protein while the rows of the heat map represent each protein in the pangenome aligned to the reference protein. Insertions and deletions in the alignments of the proteins are characterized by a ‘-’. The heatmap representation shifts from blue (benign outcomes) to red (strong phenotypic impact) for variants within the pangenome as compared to the reference protein. Hovering over a cell provides additional information about the possible substitution including B73 position, target position, target genome, target gene model, substitution, and score. This view is only available for the canonical transcript of each gene model. 
+### Variant Effects across the Pan-genome
+The second view also displays heat maps with a broad and detailed view, but in the pan-genome instance, they show the effects of naturally occurring variations across the pan-genome. The width of the heatmap represents each position of the protein of the reference protein while the rows of the heat map represent each protein in the pan-genome aligned to the reference protein. Insertions and deletions in the alignments of the proteins are characterized by a ‘-’. The heatmap representation shifts from blue (benign outcomes) to red (strong phenotypic impact) for variants within the pan-genome as compared to the reference protein. Hovering over a cell provides additional information about the possible substitution including B73 position, target position, target genome, target gene model, substitution, and score. This view is only available for the canonical transcript of each gene model. 
 
-![Variant Effects across the Pangenome](./figures/Figure3.png)
+![Variant Effects across the Pan-genome](./figures/Figure3.png)
 
 ### Search
 The search section has a search bar and short summary of the tool. The search will accept gene models, transcripts, and protein identifiers.
@@ -88,13 +88,13 @@ python split_esm_output_for_website.py proteins.csv ./csv/
 ```
 ## Variant effect heat maps for a pan-genome
 
-These next steps combine the output from the esm-variants with the multiple seqeunce alignments of the proteins in a pangenome.  Step 1, download or generate multiple sequence alignments and store the FASTA seqeunces in a FASTA file.  Next, run three Python scripts to create heatmap, target, and query TSV files.
+These next steps combine the output from the esm-variants with the multiple seqeunce alignments of the proteins in a pan-genome.  Step 1, download or generate multiple sequence alignments and store the FASTA seqeunces in a FASTA file.  Next, run three Python scripts to create heatmap, target, and query TSV files.
 
 Step 2: use format_pan_heatmap.py to convert each FASTA file into a TSV that list the x and y position of the heatmap, the variant score, the positions of the amino acid in B73 and target protein, and the amino acid codes at those positions.
 ```bash
 python format_pan_heatmap.py ./msa/ ./heatmap/
 ```
-Step 3: use format_pan_target.py to convert each FASTA file into a TSV that list the y position of the heatmap and the gene model and genome name associated with that row of the heatmap.  This script will need to be modified for the genomes in the desired pangenome. 
+Step 3: use format_pan_target.py to convert each FASTA file into a TSV that list the y position of the heatmap and the gene model and genome name associated with that row of the heatmap.  This script will need to be modified for the genomes in the desired pan-genome. 
 
 ```bash
 python format_pan_target.py ./msa/ ./target/
