@@ -3,7 +3,7 @@ PanEffect is a JavaScript framework to explore variant effects across a pan-geno
 
 ## MaizeGDB instance of PanEffect
 
-https://www.maizegdb.org/effect/index.html
+https://www.maizegdb.org/effect/
 
 # PanEffect website
 
