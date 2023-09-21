@@ -22,7 +22,7 @@ The first variant effects view provides a visualization of the variant effects o
 ![Variant Effects in reference genome](./figures/Figure2.png)
 
 ### Variant Effects across the Pan-genome
-The second view also displays heatmaps with a broad and detailed view, but in the pan-genome instance, they show the effects of naturally occurring variations across the pan-genome. The width of the heatmap represents each position of the protein of the reference protein while the rows of the heatmap represent each protein in the pan-genome aligned to the reference protein. Insertions and deletions in the alignments of the proteins are characterized by a ‘-’. The heatmap representation shifts from blue (benign outcomes) to red (strong phenotypic impact) for variants within the pan-genome as compared to the reference protein. Hovering over a cell provides additional information about the possible substitution including B73 position, target position, target genome, target gene model, substitution, and score. This view is only available for the canonical transcript of each gene model. 
+The second view also displays heatmaps with a broad and detailed view, but in the pan-genome instance, they show the effects of naturally occurring variations across the pan-genome. The width of the heatmap represents each position of the protein of the reference protein while the rows of the heatmap represent each protein in the pan-genome aligned to the reference protein. Insertions and deletions in the alignments of the proteins are characterized by a ‘-’. The heatmap representation shifts from blue (benign outcomes) to red (strong phenotypic impact) for variants within the pan-genome as compared to the reference protein. Hovering over a cell provides additional information about the possible substitution including reference position, target position, target genome, target gene model, substitution, and score. This view is only available for the canonical transcript of each gene model. 
 
 ![Variant Effects across the Pan-genome](./figures/Figure3.png)
 
@@ -32,7 +32,7 @@ The search section has a search bar and short summary of the tool. The search wi
 ![Search](./figures/Figure4.png)
 
 ### Help
-The help section provides summaries of each of the visualization components.  It also provides descriptions and links to the data sources, tools, and references used to create PanEffect. 
+The help section provides summaries of each of the visualization components.  It also provides descriptions and links to the data sources, tools, downloads, and references used to create PanEffect. 
 
 ![Help](./figures/Figure5.png)
 
@@ -55,7 +55,8 @@ website/
     ├── pan.js
     └── support.js
 ├── pfam
-├── query  
+├── query
+├── synonym  
 ├── target
 └── uniprot
 ```
