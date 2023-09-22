@@ -72,7 +72,7 @@ https://ars-usda.app.box.com/v/maizegdb-public/folder/225221910694
 
 - Python
 - Python librairies argparse, biopython, collections, csv, pandas, torch
-- The esm-variant tools works using a CPUs but runs a lot faster on GPU hardware.
+- The esm-variant tools works using a CPUs but runs a lot faster on GPU hardware. Pre-computed variant scores for many maize genomes are available here: https://ars-usda.app.box.com/v/maizegdb-public/folder/222631922387
 
 ## Variant effect heatmaps for a reference genome
 
@@ -103,7 +103,6 @@ for filename_path in $filelist; do
 done
 ```
 
-
 ## Variant effect heatmaps for a pan-genome
 
 These next steps combine the output from the esm-variants with the multiple seqeunce alignments of the proteins in a pan-genome.  Step 1, download or generate multiple sequence alignments and store the FASTA seqeunces in a FASTA file.  Next, run three Python scripts to create heatmap, target, and query TSV files.
@@ -128,6 +127,23 @@ Run the make_pfam_files.py script on a Interproscan output file (see examples). 
 ```bash
 python make_pfam_files.py proteins_interproscan.tsv ./pfam/B73/
 ```
+
+You can also use Hmmer to generate Pfam domains be following the instuctions here: http://hmmer.org/ 
+
+A sample commmand to build domains using hmmscan and the Pfam-A libraries:
+
+```bash
+hmmscan --cpu 14 --domtblout ./domains/output.domains Pfam-A.hmm proteins.fa
+```
+
+Next run the following command 
+
+```bash
+#Arguments include input file, e-value cutoff, and output directory
+python create_domains_from_hmmer.py ./domains/output.domains .001 ./pfam/
+```
+
+The output directory will contain one file for each protein listing the Pfam domains
 
 ## GWAS trait annotations
 
