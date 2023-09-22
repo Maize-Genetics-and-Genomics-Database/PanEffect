@@ -5,7 +5,7 @@
     }
 
     .main-container {
-        width: 1400px;
+        width: 1500px;
         margin: 0 auto;
     }
 
@@ -334,6 +334,7 @@
         width: 1200px;
         height: 200px;
         position: relative;
+        min-height: 600px;
     }
 
     #zoomed-heatmap {
