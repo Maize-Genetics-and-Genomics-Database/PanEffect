@@ -93,6 +93,130 @@ function colorScalePan(score) {
     return '#DDDDDD';
 }
 
+//Returns a color value based on a the genome type in the pangenome.  This is used to color by the Heterotic Group
+function colorGenome(genome) {
+    if (genome == "B73_v5") {
+        return 'black';  //stiff-stalk
+    } else if (genome == "B73_v4") {
+        return 'black'; //stiff-stalk
+    } else if (genome == "A632") {
+        return 'black'; //stiff-stalk
+    } else if (genome == "LH244") {
+        return 'black'; //stiff-stalk
+    } else if (genome == "A188") {
+        return '#666666';; //mixed
+    } else if (genome == "K0326Y") {
+        return '#666666';; //mixed
+    } else if (genome == "M37W") {
+        return '#666666';; //mixed
+    } else if (genome == "Mo18W") {
+        return '#666666';; //mixed
+    } else if (genome == "S37") {
+        return '#666666';; //mixed
+    } else if (genome == "Tx303") {
+        return '#666666';; //mixed
+    } else if (genome == "W22_v2") {
+        return '#666666'; //mixed
+    } else if (genome == "B97") {
+        return '#455edd'; //non SS
+    } else if (genome == "Ky21") {
+        return '#455edd'; //non SS
+    } else if (genome == "M162W") {
+        return '#455edd'; //non SS
+    } else if (genome == "Ms71") {
+        return '#455edd'; //non SS
+    } else if (genome == "Oh7B") {
+        return '#455edd'; //non SS
+    } else if (genome == "PH207") {
+        return '#a807ed'; //Iodent
+    } else if (genome == "Dan340") {
+        return '#da9af5'; //Lancaster
+    } else if (genome == "Mo17") {
+        return '#da9af5'; //Lancaster
+    } else if (genome == "Oh43") {
+        return '#da9af5'; //Lancaster
+    } else if (genome == "DK105") {
+        return '#9ae6f5'; //European Flint
+    } else if (genome == "EP1") {
+        return '#9ae6f5'; //European Flint
+    } else if (genome == "F7") {
+        return '#9ae6f5'; //European Flint
+    } else if (genome == "PE0075") {
+        return '#9ae6f5'; //European Flint
+    } else if (genome == "Jing724") {
+        return '#f50707'; //Chinese
+    } else if (genome == "Xu178") {
+        return '#f50707'; //Chinese
+    } else if (genome == "Ye478") {
+        return '#f50707'; //Chinese
+    } else if (genome == "Zheng58") {
+        return '#f50707'; //Chinese
+    } else if (genome == "Chang7_2") {
+        return '#fa7d7d'; //Tang SiPingTou
+    } else if (genome == "Huangzaosi") {
+        return '#fa7d7d';//Tang SiPingTou
+    } else if (genome == "Jing92") {
+        return '#fa7d7d';//Tang SiPingTou
+    } else if (genome == "HP301") {
+        return '#ce58ce'; //Popcorn
+    } else if (genome == "Ia453") {
+        return 'pink'; //Sweet corn
+    } else if (genome == "Il14H") {
+        return 'pink'; //Sweet corn
+    } else if (genome == "P39") {
+        return 'pink'; //Sweet corn
+    } else if (genome == "CIMBL55") {
+        return '#30c727'; //Tropical
+    } else if (genome == "CML103") {
+        return '#30c727'; //Tropical
+    } else if (genome == "CML228") {
+        return '#30c727'; //Tropical
+    } else if (genome == "CML247") {
+        return '#30c727'; //Tropical
+    } else if (genome == "CML277") {
+        return '#30c727'; //Tropical
+    } else if (genome == "CML322") {
+        return '#30c727'; //Tropical
+    } else if (genome == "CML333") {
+        return '#30c727'; //Tropical
+    } else if (genome == "CML52") {
+        return '#30c727'; //Tropical
+    } else if (genome == "CMML69") {
+        return '#30c727'; //Tropical
+    } else if (genome == "Ki11") {
+        return '#30c727'; //Tropical
+    } else if (genome == "Ki3") {
+        return '#30c727'; //Tropical
+    } else if (genome == "NC350") {
+        return '#30c727'; //Tropical
+    } else if (genome == "NC358") {
+        return '#30c727'; //Tropical
+    } else if (genome == "SK") {
+        return '#30c727'; //Tropical
+    } else if (genome == "Tzi8") {
+        return '#30c727'; //Tropical
+    } else if (genome == "Gigi") {
+        return '#773510'; //PanAnd
+    } else if (genome == "Momo") {
+        return '#773510'; //PanAnd
+    } else if (genome == "PI615697") {
+        return '#773510'; //PanAnd
+    } else if (genome == "RIMHU001") {
+        return '#ca854c'; //Teosinte
+    } else if (genome == "TIL01") {
+        return '#ca854c'; //Teosinte
+    } else if (genome == "TIL11") {
+        return '#ca854c'; //Teosinte
+    } else if (genome == "TIL18") {
+        return '#ca854c'; //Teosinte
+    } else if (genome == "TIL25") {
+        return '#DDDDDD';
+    }
+
+    // Fallback, you can adjust this if needed
+    return '#111111';
+}
+
 //Turn loading icon off
 function offLoadingIcon() {
     const loadingIcon = document.getElementById('loading-icon');

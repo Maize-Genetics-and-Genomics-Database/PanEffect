@@ -33,7 +33,7 @@ function drawStructurePan(structure) {
     const legendBoxSize = 30; // Size of each colored box in the legend
     const padding = 10; // Space between each legend item
     let yOffset = 5; // Initial vertical position for the first legend item
-    let xOffset = 70;
+    let xOffset = 20;
 
     ctx.font = '15px Arial';
 
@@ -112,7 +112,7 @@ function renderHeatmapPan(data) {
     ];
 
     container.style.position = 'absolute';
-    container.style.left = (window_length + 100) + 'px';
+    container.style.left = (window_length + 110) + 'px';
 
     const benignEffectLabel = document.createElement('div');
     benignEffectLabel.innerText = 'Benign effect';
@@ -186,7 +186,99 @@ function renderHeatmapPan(data) {
     strongEffectLabel.style.width = '100px';
     strongEffectLabel.style.fontFamily = 'Arial';
     strongEffectLabel.style.fontSize = '15px';
+    strongEffectLabel.style.marginBottom = '30px'; // Add margin here
     container.appendChild(strongEffectLabel);
+
+    const containerWrapper = document.createElement('div');
+    containerWrapper.style.border = '1px solid black';
+    containerWrapper.style.borderRadius = '5px'; // Add rounded corners with a 5px radius
+    //containerWrapper.style.margin = '15px'; // Add a 5px margin
+
+    // Create a wrapper div
+    const container2= document.createElement('div');
+    container2.style.margin = '15px'; // Add a 5px margin to the wrapper
+
+    ///This is custum code to add a legend for the color-coding of the genomes
+
+    let GenomeLabel = document.createElement('div');
+    GenomeLabel.innerText = 'Heterotic group';
+    GenomeLabel.className = 'labelCB';
+    GenomeLabel.style.width = '125px';
+    GenomeLabel.style.fontFamily = 'Arial';
+    GenomeLabel.style.fontSize = '15px';
+    GenomeLabel.style.marginTop = '0px'; // Add margin here
+    GenomeLabel.style.textDecoration = 'underline';
+    container2.appendChild(GenomeLabel);
+
+    GenomeLabel = document.createElement('div');
+    GenomeLabel.innerText = 'Stiff stalk';
+    GenomeLabel.style.color = 'black';
+    container2.appendChild(GenomeLabel);
+
+    GenomeLabel = document.createElement('div');
+    GenomeLabel.innerText = 'Mix';
+    GenomeLabel.style.color = '#666666';
+    container2.appendChild(GenomeLabel);
+
+    GenomeLabel = document.createElement('div');
+    GenomeLabel.innerText = 'Non-stiff-stalk';
+    GenomeLabel.style.color = '#455edd';
+    container2.appendChild(GenomeLabel);
+
+    GenomeLabel = document.createElement('div');
+    GenomeLabel.innerText = 'Iodent';
+    GenomeLabel.style.color = '#a807ed';
+    container2.appendChild(GenomeLabel);
+
+    GenomeLabel = document.createElement('div');
+    GenomeLabel.innerText = 'Lancaster';
+    GenomeLabel.style.color = '#da9af5';
+    container2.appendChild(GenomeLabel);
+
+    GenomeLabel = document.createElement('div');
+    GenomeLabel.innerText = 'European flint';
+    GenomeLabel.style.color = '#9ae6f5';
+    container2.appendChild(GenomeLabel);
+
+    GenomeLabel = document.createElement('div');
+    GenomeLabel.innerText = 'Chinese';
+    GenomeLabel.style.color = '#f50707';
+    container2.appendChild(GenomeLabel);
+
+    GenomeLabel = document.createElement('div');
+    GenomeLabel.innerText = 'Tang SiPingTou';
+    GenomeLabel.style.color = '#fa7d7d';
+    container2.appendChild(GenomeLabel);
+
+    GenomeLabel = document.createElement('div');
+    GenomeLabel.innerText = 'Popcorn';
+    GenomeLabel.style.color = '#ce58ce';
+    container2.appendChild(GenomeLabel);
+
+    GenomeLabel = document.createElement('div');
+    GenomeLabel.innerText = 'Sweet corn';
+    GenomeLabel.style.color = 'pink';
+    container2.appendChild(GenomeLabel);
+
+    GenomeLabel = document.createElement('div');
+    GenomeLabel.innerText = 'Tropical';
+    GenomeLabel.style.color = '#30c727';
+    container2.appendChild(GenomeLabel);
+
+    //Add this code back in once the PanAnd genomes are available
+    //GenomeLabel = document.createElement('div');
+    //GenomeLabel.innerText = 'PanAnd';
+    //GenomeLabel.style.color = '#773510';
+    //container2.appendChild(GenomeLabel);
+
+    //GenomeLabel = document.createElement('div');
+    //GenomeLabel.innerText = 'Teosinte';
+    //GenomeLabel.style.color = '#ca854c';
+    //container2.appendChild(GenomeLabel);
+
+    containerWrapper.appendChild(container2);
+
+    container.appendChild(containerWrapper);
 
     fullHeatmapEl.appendChild(container);
 }
@@ -431,6 +523,7 @@ function renderDomainsPan(geneModelElement, domainsArray) {
 
         zoomedHeatmapEl.appendChild(fragment);
 
+        let save_top = 0;
         for (let i = 1; i < GN_size; i++) {
             const cell = document.createElement('div');
             x = 50
@@ -441,9 +534,20 @@ function renderDomainsPan(geneModelElement, domainsArray) {
             cell.style.position = 'absolute';
             cell.style.left = (x * cellWidth + 6) + 'px';  // -1 because X is 1-indexed
             cell.style.top = cellHeight * (yPosition - 1) + 'px';  // -1 because Y is 1-indexed
-            cell.innerText = String(GN_array[i]);
+            if (GM_array[i].startsWith("Zm00014ba"))
+            {
+                cell.innerText = String("Mo17_v2");
+            } else if (GM_array[i].startsWith("Zm00014a"))
+            {
+                cell.innerText = String("Mo17_v1");
+            } else {
+                cell.innerText = String(GN_array[i]);
+            }
+
             cell.style.paddingLeft = "6px";
+            cell.style.color = colorGenome(String(GN_array[i])); // Code that sets the text color based on the Heterotic Group
             zoomedHeatmapEl.appendChild(cell);
+            save_top = cellHeight * (yPosition ) + 'px';
         }
 
         //Create the color bar legend
@@ -501,9 +605,26 @@ function renderDomainsPan(geneModelElement, domainsArray) {
             tooltip_h_pan.style.visibility = "hidden";
         });
 
+        i = 0
+        data.forEach(cellData => {
+            const x = +cellData["X"];
+            const yPosition = +cellData["Y"]
+            const wild_type = cellData["WT"];
+
+            if (x >= start && x <= end && yPosition == "2") {
+                const label = document.createElement('div');
+                label.className = 'label_bottom';
+                label.style.top = save_top;
+                label.style.left = scaleZoom(i) + 'px';
+                label.innerText = wild_type;
+                zoomedHeatmapEl.appendChild(label);
+                i = i + 1;
+            }
+        });
+
     }
 
-    // Function to create the WT residues on the bottom of the heatmap
+    // Function to create the WT residues on the bottom of the heatmap - this function is no longer needed
     function createZoomedWTLinePan(container,data, start) {
         container.innerHTML = "";
         const end = start + 49;

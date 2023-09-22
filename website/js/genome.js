@@ -189,9 +189,7 @@ function renderHeatmap(data) {
 function updateHighlightBox(start) {
     const highlightBox = document.getElementById('highlight-box');
     const zoomedWidth = 50;  // We're zooming into 50 units
-    // scaleFactor = window_length / gene_model_length;  // Normalization factor
 
-    //console.log("test2 " + start + " " + scaleFactor + " " + zoomedWidth);
     highlightBox.style.left = (start - 1) * scaleFactor + 'px';  // -1 because we're 1-indexed
     highlightBox.style.width = (zoomedWidth * scaleFactor - 3) + 'px';   //adjust for border length (3px)
 }
@@ -200,7 +198,6 @@ function renderDomains(geneModelElement, domainsArray) {
         const domainHeight = 20;
         const domainMarginTop = 5;
 
-        //console.log("Length: " + domainsArray.length);
         if (domainsArray.length > 0) {
             geneModelElement.style.height = domainHeight + (domainHeight + domainMarginTop) * (domainsArray.length - 1) + 'px';
         } else {
@@ -400,7 +397,6 @@ function loadDSSP() {
             x = i;
         }
     }
-
 
     function updateHeatmapZoom(data, start) {
         const end = start + 49;

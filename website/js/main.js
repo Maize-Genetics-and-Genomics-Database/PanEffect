@@ -11,7 +11,7 @@ let GM_array = {};
 let GN_array = {};
 let X_to_WT = {}; //converts  MSA coordinates to wild-typoe amino acid
 let X_to_X2 = {}; //converts  MSA coordinates to reference coordinates
-let GN_size = 0;
+let GN_size = 0; //Gene number
 
 let scaleFactor = 0;
 let scaleFactorPan = 0;
@@ -20,15 +20,14 @@ let scaleFactorZoom = window_length / 50;  //Normalization of the size of each c
 let scaleFactorZoomPan = window_length / 50;  //Normalization of the size of each cell in the heatmap
 let currentlyVisibleTooltip = null;  //Controls what tooltip is visible
 
-
 //This section loads the MaizeGDB specific annotations including Uniprot and gene annotations, this section would be customized for other model specific annotations
 let uniprot_filename = './uniprot/' + gene_model + '.tsv';
+let synonym_filename = './synonym/maize_synonym.tsv';
 
 async function openUniprot(id) {
     try {
-        let uniprot_filename = './uniprot/' + id + '.tsv'; // This assumes that the id should be used to construct the filename. Adjust if this is not correct.
+        let uniprot_filename = './uniprot/' + id + '.tsv';
 
-        // Assuming can_flag and other variables are available here. Otherwise, they need to be passed or defined.
         let response = await fetch(uniprot_filename);
         if (!response.ok) {
             return false;
@@ -67,7 +66,7 @@ async function openUniprot(id) {
     }
 }
 
-//This function loads the CSV containing the positions of the heat map, the variant effect score, and the amino acids for the WT and Substitution
+//This function loads the CSV containing the positions of the heatmap, the variant effect score, and the amino acids for the WT and Substitution
 //HEADER in CSV: X,Y,Score,WT,Sub
 //SMAPLE DATA: 1,9,-9.54,M,K
 
@@ -94,7 +93,7 @@ try {
     let lastLine = rows[rows.length - 1];
 
     if (lastLine) {
-        let lastData = lastLine.split(",");  // Assuming the CSV is comma-separated
+        let lastData = lastLine.split(",");
 
         if (lastData.length > 0) {
             gene_model_length = parseInt(lastData[0], 10);
@@ -117,7 +116,7 @@ async function fetchAndProcessQueryData(queryFilename) {
         // Fetch the TSV content
         let response = await fetch(queryFilename);
         if (!response.ok) {
-            document.getElementById("pan-genome").innerHTML = '<br><br><div class="text-content" style="color: red;">Pan-genome data for the gene, transcript, or protein id <b>' + main_id + '</b> was not found.  Use the search tab to enter a new search term.</div>';
+            document.getElementById("pan-genome").innerHTML = '<div class="text-content" style="color: red;">Pan-genome data for the gene, transcript, or protein id <b>' + main_id + '</b> was not found.  Use the search tab to enter a new search term.</div>';
             return false;
             //throw new Error("Failed to fetch the file.");
         }
@@ -126,6 +125,7 @@ async function fetchAndProcessQueryData(queryFilename) {
 
         if(data.includes("<html") || data.includes("<script"))
         {
+            document.getElementById("pan-genome").innerHTML = '<div class="text-content" style="color: red;">Pan-genome data for the gene, transcript, or protein id <b>' + main_id + '</b> was not found.  Use the search tab to enter a new search term.</div>';
             return false;
         }
 
@@ -156,7 +156,7 @@ async function fetchAndProcessQueryData(queryFilename) {
         return true;
 
     } catch (error) {
-        document.getElementById("pan-genome").innerHTML = '<br><br><div class="text-content" style="color: red;">Pan-genome data for the gene, transcript, or protein id <b>' + main_id + '</b> was not found.  Use the search tab to enter a new search term.</div>';
+        document.getElementById("pan-genome").innerHTML = '<div class="text-content" style="color: red;">Pan-genome data for the gene, transcript, or protein id <b>' + main_id + '</b> was not found.  Use the search tab to enter a new search term.</div>';
         console.log("Error fetching or processing the file:", error);
         return false;
     }
@@ -188,7 +188,7 @@ async function fetchTargetData(targetFilename) {
         return true;
 
     } catch (error) {
-        document.getElementById("pan-genome").innerHTML = '<br><br><div class="text-content" style="color: red;">Pan-genome data for the gene, transcript, or protein id <b>' + main_id + '</b> was not found.  Use the search tab to enter a new search term.</div>';
+        document.getElementById("pan-genome").innerHTML = '<div class="text-content" style="color: red;">Pan-genome data for the gene, transcript, or protein id <b>' + main_id + '</b> was not found.  Use the search tab to enter a new search term.</div>';
         console.log("Target Error fetching or processing the TSV file:", error);
     }
 }
@@ -198,7 +198,7 @@ async function fetchPfamData(transcript) {
     let query_filename = './query/' + gm_can + '.tsv';
 
     try {
-        await fetchAndProcessQueryData(query_filename);  // Assuming this function does some setup that the following code relies on
+        await fetchAndProcessQueryData(query_filename);
         populateSummary();
         loadAndDisplayTraits(gene_model);
 
@@ -262,12 +262,26 @@ async function fetchPfamData(transcript) {
     }
 }
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", async function() {
 
-    onLoadingIcon();
+    onLoadingIcon(); //Turn loading Icon on
+
+    //Check for Synonyms
+
+    try {
+       const result_syn = await checkSynonym(gene_model);
+       if (result_syn !== false) {
+          gene_model = result_syn;
+       }
+
+   } catch (error) {
+        // Handle other errors that may occur during the await operation
+        console.log("No synonym found");
+   }
 
     openUniprot(gene_model).then((UniProtresult) => {
         if (UniProtresult) {
+
             openGM(protein).then((result) => {
                 scaleFactor = window_length / gene_model_length;
                 let b73_flag = true;
@@ -326,6 +340,40 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+//This function checks the synonym file for gene names
+async function checkSynonym(id) {
+  return new Promise((resolve, reject) => {
+    // Use the Fetch API to fetch the file content
+    fetch(synonym_filename)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Failed to fetch file: ${response.statusText}`);
+        }
+        return response.text(); // Get the file content as text
+      })
+      .then((fileContents) => {
+        // Split the file contents into lines
+        const lines = fileContents.split('\n');
+        // Iterate through each line to check for the ID in the 2nd column
+        let xx = 1;
+        for (const line of lines) {
+          const columns = line.split(/\s+|\t+/);
+          if (columns.length >= 2 && columns[1] == id) {
+            //console.log(`ID '${id}' found.`);
+            resolve(columns[0]); // Resolve the Promise with the value
+            return; // Exit the function after finding the ID
+          }
+        }
+        // If the ID is not found, reject the Promise with false
+        reject(false);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+}
+
+//Main function that loads most of the data sets
 async function fetchDataAndSetup(protein, protein_can, b73_flag, pan_flag) {
     try {
         let gene_model_file = "./csv/" + protein + ".csv";
@@ -398,26 +446,27 @@ async function fetchDataAndSetup(protein, protein_can, b73_flag, pan_flag) {
                         let response_can = await fetch(heatmap_filename);
 
                         if (!response_can.ok) {
+                            document.getElementById("pan-genome").innerHTML = '<div class="text-content" style="color: red;">Pan-genome data for the gene, transcript, or protein id <b>' + main_id + '</b> was not found.  Use the search tab to enter a new search term.</div>';
                             throw new Error("Failed to fetch gene model canonical CSV file.");
                         }
                         let data_can = await response_can.text();
 
                         if(data_can.includes("<html") || data_can.includes("<script"))
                         {
+                            document.getElementById("pan-genome").innerHTML = '<div class="text-content" style="color: red;">Pan-genome data for the gene, transcript, or protein id <b>' + main_id + '</b> was not found.  Use the search tab to enter a new search term.</div>';
                             throw new Error("Failed to fetch gene model canonical CSV file.");
                         }
 
                         parsedDataCan = d3.tsvParse(data_can);
                         updateHeatmapZoomPan(parsedDataCan, 1);
                         updateHighlightBoxPan(1);
-                        createZoomedWTLinePan(document.getElementById('zoomWTLine-pan'), parsedDataCan, 1);
                         renderHeatmapPan(parsedDataCan);
                     } else {
                         pan_flag = false;
                     }
                 } catch (error) {
                     offLoadingIcon();
-                    document.getElementById("pan-genome").innerHTML = '<br><br><div class="text-content" style="color: red;">Pan-genome data for the gene, transcript, or protein id <b>' + main_id + '</b> was not found.  Use the search tab to enter a new search term.</div>';
+                    document.getElementById("pan-genome").innerHTML = '<div class="text-content" style="color: red;">Pan-genome data for the gene, transcript, or protein id <b>' + main_id + '</b> was not found.  Use the search tab to enter a new search term.</div>';
                     console.error("There was an error:", error.message);
                 }
       }
@@ -485,7 +534,6 @@ async function fetchDataAndSetup(protein, protein_can, b73_flag, pan_flag) {
 
                 // Update heatmap based on slider value
                 updateHeatmapZoomPan(parsedDataCan, +this.value);
-                createZoomedWTLinePan(document.getElementById('zoomWTLine-pan'), parsedDataCan, +this.value);
                 updateHighlightBoxPan(+this.value);
                 createZoomedNumberLinePan(document.getElementById('zoomNumberLine-pan'), +this.value);
             });

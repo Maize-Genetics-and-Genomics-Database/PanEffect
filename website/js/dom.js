@@ -1,4 +1,4 @@
-
+//Function to populate the gene and protein annotations
 function populateSummary() {
 
     document.getElementById("summary_gm").innerHTML = '<a target="_blank" href="https://www.maizegdb.org/gene_center/gene/' + gene_model + '">' + gene_model + '</a>';
@@ -22,10 +22,12 @@ function populateSummary() {
     document.getElementById("summary_download").innerHTML = '<a href="' + gene_model_file + '" target="_blank">Download variant effects file</a>';
 }
 
+//Changes the example text in the search form
 function changeExample(option) {
     document.getElementById("p1").value=option;
 }
 
+//Activates a DOM element given an ID
 function showContent(id) {
     const contents = document.querySelectorAll('.content');
     contents.forEach(content => {
@@ -44,6 +46,7 @@ function changeButton(id) {
     document.getElementById(id).classList.add('active');
 }
 
+//Code to turn on and off tabs
 function highlightTab(id) {
     // Loop through all elements with class "tab" and remove the 'active' class
     const tabs = document.querySelectorAll('.tab');
@@ -58,6 +61,7 @@ function highlightTab(id) {
     }
 }
 
+//Displays error messages if search term is not found
 function errorInnerHTML() {
 
     const element1 = document.getElementById("search_error");
@@ -83,43 +87,45 @@ function errorInnerHTML() {
 
     const element4 = document.getElementById("b73");
     if (element4) {
-        element4.innerHTML = '<br><br><div class="text-content" style="color: red;">The gene, transcript, or protein id <b>' + main_id + '</b> was not found.  Use the search tab to enter a new search term.</div>';
+        element4.innerHTML = '<div class="text-content" style="color: red;">The gene, transcript, or protein id <b>' + main_id + '</b> was not found.  Use the search tab to enter a new search term.</div>';
     } else {
         console.error("Element with id:", element4, "not found!");
     }
 
     const element5 = document.getElementById("pan-genome");
     if (element5) {
-        element5.innerHTML = '<br><br><div class="text-content" style="color: red;">The gene, transcript, or protein id <b>' + main_id + '</b> was not found.  Use the search tab to enter a new search term.</div>';
+        element5.innerHTML = '<div class="text-content" style="color: red;">The gene, transcript, or protein id <b>' + main_id + '</b> was not found.  Use the search tab to enter a new search term.</div>';
     } else {
         console.error("Element with id:", element5, "not found!");
     }
 }
 
+//Error messages if an empty search is performed
 function emptyInnerHTML() {
 
     const element2 = document.getElementById("summary");
     if (element2) {
-        element2.innerHTML = '<br><br>Use the search tab to enter a gene, transcript, or protein id.</p>';
+        element2.innerHTML = '<br>Use the search tab to enter a gene, transcript, or protein id.</p>';
     } else {
         console.error("Element with id:", element2, "not found!");
     }
 
     const element4 = document.getElementById("b73");
     if (element4) {
-        element4.innerHTML = '<br><br>Use the search tab to enter a gene, transcript, or protein id.</p>';
+        element4.innerHTML = '<br>Use the search tab to enter a gene, transcript, or protein id.</p>';
     } else {
         console.error("Element with id:", element4, "not found!");
     }
 
     const element5 = document.getElementById("pan-genome");
     if (element5) {
-        element5.innerHTML = '<br><br>Use the search tab to enter a gene, transcript, or protein id.</p>';
+        element5.innerHTML = '<br>Use the search tab to enter a gene, transcript, or protein id.</p>';
     } else {
         console.error("Element with id:", element5, "not found!");
     }
 }
 
+//Code for the genome slider bar
 function sliderInnerHTML(elementId) {
     let slider_window_Length = 50;
     let slider_length = gene_model_length - slider_window_Length + 1;
@@ -138,6 +144,7 @@ function sliderInnerHTML(elementId) {
     }
 }
 
+//Code for the pan-genome slider bar
 function sliderInnerHTMLPan(elementId) {
     let slider_window_Length = 50;
     let slider_length = alignment_length - slider_window_Length + 1;
@@ -156,6 +163,7 @@ function sliderInnerHTMLPan(elementId) {
     }
 }
 
+//Code to load the trait data - custom code for maize data
 function loadAndDisplayTraits(genemodel) {
     fetch('./traits/' + genemodel + '.tsv')
         .then(response => {
