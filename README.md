@@ -66,7 +66,7 @@ Each of the  data directories has a sample entry for the B73 gene model Zm00001e
 
 ## Download full maize datasets
 
-https://ars-usda.app.box.com/folder/225221910694
+https://ars-usda.app.box.com/v/maizegdb-public/folder/225221910694
 
 ## Requirements
 
