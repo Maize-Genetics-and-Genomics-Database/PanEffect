@@ -87,6 +87,23 @@ Use the split_esm_output_for_website.py script to convert the esm-variant output
 ```bash
 python split_esm_output_for_website.py proteins.csv ./csv/
 ```
+
+## Generating MSAs
+
+There are many different programs available to generate pan-genomes or gene families that can be used by PanEffect.  The two tools we tested were pandagma (https://github.com/legumeinfo/pandagma) and Orthofiner (https://github.com/davidemms/OrthoFinder).  Follow the steps in either approach to create a set of pan-genomes.  Next generate a MSA using FAMSA (https://github.com/refresh-bio/FAMSA).  For example, if using Orthofinder to generate orthogroups, loop through the Orthogroup_Sequences directory 
+
+```bash
+conda install -c bioconda famsa
+
+#Create individual fasta files for each protein
+filelist=$(ls ${BASE_DIR}/Orthogroup_Sequences/*.fa)
+for filename_path in $filelist; do
+        filename=$(basename "$filename_path")
+        famsa ${BASE_DIR}/Orthogroup_Sequences/${filename} ${BASE_DIR}/msa/${filename}.famsa
+done
+```
+
+
 ## Variant effect heatmaps for a pan-genome
 
 These next steps combine the output from the esm-variants with the multiple seqeunce alignments of the proteins in a pan-genome.  Step 1, download or generate multiple sequence alignments and store the FASTA seqeunces in a FASTA file.  Next, run three Python scripts to create heatmap, target, and query TSV files.
