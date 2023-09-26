@@ -5,6 +5,10 @@ PanEffect is a JavaScript framework to explore variant effects across a pan-geno
 
 https://www.maizegdb.org/effect/maize/
 
+## Citation
+
+Andorf, et al. PanEffect: A pan-genome visualization tool for variant effects in maize. bioRxiv 2023.09.25.559155; doi: https://doi.org/10.1101/2023.09.25.559155
+
 # PanEffect website
 
 ## PaneEffect website description
