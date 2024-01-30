@@ -9,15 +9,15 @@ https://www.maizegdb.org/effect/maize/
 
 Andorf, et al. PanEffect: A pan-genome visualization tool for variant effects in maize. bioRxiv 2023.09.25.559155; doi: https://doi.org/10.1101/2023.09.25.559155
 
+## Browser Compatibility 
+
+PanEffect is engineered using a JavaScript framework, ensuring that most of its functionalities operate directly within your local browser. To guarantee optimal performance and a seamless user experience, we have tested and fine-tuned the tool for compatibility with the latest versions of Google Chrome and Mozilla Firefox. However, users accessing PanEffect via the Safari browser might experience some performance inconsistencies. Notably, there can be delays in the visualization updates of large protein heatmaps, potentially impacting overall usability. Additionally, factors such as limited memory capacity on your device or having an excessive number of browser tabs open may contribute to slower page loading times and responsiveness. Should you encounter any issues beyond these, please do not hesitate to ask for assistance. You can contact Carson Andorf directly at carson.andorf@usda.gov or use the MaizeGDB Feedback Form to report problems or provide feedback.
+
 # PanEffect website
 
 ## PaneEffect website description
 
 The PanEffect web interface has five components: Gene Summary, Variant Effects in reference genome, Variant Effects across the Pan-genome, Search, and Help. Each component is fully client-side using JavaScript to manage the front-end visualization. Figure 1 provides an overview of the reference genome view and Figure 2 shows pan-genome view. PanEffect is organized into one HTML file, five Javascript files, and a CSS file. The index HTML file contains the framework for the displays. The Javascript files manage the data loading (main.js), reference genome visualization (genome.js), pan-genome visualization (pan.js), webpage layout (dom.js), and support functions (support.js). The CSS file store the styles and formatting of the tool. A description of each of the five major components, provided as tabs in PanEffect, is provided below.
-
-## Browser Compatibility Notice for PanEffect Tool
-
-PanEffect is engineered using a JavaScript framework, ensuring that most of its functionalities operate directly within your local browser. To guarantee optimal performance and a seamless user experience, we have tested and fine-tuned the tool for compatibility with the latest versions of Google Chrome and Mozilla Firefox. However, users accessing PanEffect via the Safari browser might experience some performance inconsistencies. Notably, there can be delays in the visualization updates of large protein heatmaps, potentially impacting overall usability. Additionally, factors such as limited memory capacity on your device or having an excessive number of browser tabs open may contribute to slower page loading times and responsiveness. Should you encounter any issues beyond these, please do not hesitate to ask for assistance. You can contact Carson Andorf directly at carson.andorf@usda.gov or use the MaizeGDB Feedback Form to report problems or provide feedback.
 
 ### Gene Summary
 This section provides a detailed look at annotations and valuable information regarding gene models and proteins. The gene summary is customizable for each instance of PanEffect. The MaizeGDB instance includes gene and gene model annotations from MaizeGDB, protein annotations from UniProt, links to 3D structure tools, and trait data from three collections of genome-wide association studies.
